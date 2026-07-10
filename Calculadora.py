@@ -18,14 +18,26 @@ def calcular():
     data_de_nascimento = data.get()
     hora_de_nascimento = hora.get()
     data_completa = data_de_nascimento + " " + hora_de_nascimento
-    print(data_completa)
     data_convertida = datetime.strptime(data_completa, "%d/%m/%Y %H:%M:%S")
     data_atual = datetime.now()
     timedelta = data_atual - data_convertida
-    print(timedelta)
+    tempo_vivido.config(text=f"Você viveu {timedelta}")
+
+    idade = data_atual.year - data_convertida.year
+    if data_atual.month < data_convertida.month or data_atual.month == data_convertida.month and data_atual.day < data_convertida.day: idade = idade -1
+    resultado.config(text=f"Você tem {idade} anos de Idade!!")
 
 botao = tk.Button(janela, text="Calcular", command=calcular)
 botao.pack()
 data.get
+
+adesivo3 = tk.Label(janela, text="Essa é a sua Idade:")
+adesivo3.pack(pady=10)
+
+resultado = tk.Label(janela, text="")
+resultado.pack(pady=5)
+
+tempo_vivido = tk.Label(janela, text="")
+tempo_vivido.pack(pady=10)
 
 janela.mainloop()
