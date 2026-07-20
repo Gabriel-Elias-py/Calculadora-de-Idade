@@ -1,5 +1,6 @@
 import tkinter as tk
 from datetime import datetime
+#from dateutil.relativedelta import relativedelta as rd
 
 janela = tk.Tk()
 janela.title("Calculadora de Idade")
@@ -20,12 +21,18 @@ def calcular():
     data_completa = data_de_nascimento + " " + hora_de_nascimento
     data_convertida = datetime.strptime(data_completa, "%d/%m/%Y %H:%M:%S")
     data_atual = datetime.now()
-    timedelta = data_atual - data_convertida
-    tempo_vivido.config(text=f"Você viveu {timedelta}")
+    
+    tempo_de_vida = data_atual - data_convertida
+    dias = tempo_de_vida.days
+    segundos = tempo_de_vida.seconds
 
-    idade = data_atual.year - data_convertida.year
+    tempo_vivido.config(text=f"Você viveu aproximadamente:\n{tempo_de_vida}")
+
+    #idade = data_atual.year - data_convertida.year
+    #idede = 
     if data_atual.month < data_convertida.month or data_atual.month == data_convertida.month and data_atual.day < data_convertida.day: idade = idade -1
     resultado.config(text=f"Você tem {idade} anos de Idade!!")
+
 
 botao = tk.Button(janela, text="Calcular", command=calcular)
 botao.pack()
